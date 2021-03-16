@@ -1,0 +1,215 @@
+{% extends 'main.html' %}
+{% load static %}
+{% load custom_filter%}
+{% load cart %}
+{% block content %}
+<div class="container">
+    <h4 style="font-size: x-large; display:inline; float: left; padding-left :20px;padding-top:  10px;">
+        <strong>Your Orders</strong>
+    </h4>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div class="row">
+        {% comment %} <div class="col-lg-5">
+            <h5 class="text-left"><strong>Shipping info</strong></h5>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="material-icons">group</i>
+                </span>
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">Full name</label>
+
+                    <input type="email" class="form-control">
+                    <span class="material-input"></span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="material-icons">group</i>
+                </span>
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">Address</label>
+
+                    <input type="email" class="form-control">
+                    <span class="material-input"></span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="material-icons">group</i>
+                </span>
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">City</label>
+
+                    <input type="email" class="form-control">
+                    <span class="material-input"></span>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">group</i>
+                        </span>
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">state</label>
+                            <input type="email" class="form-control">
+                            <span class="material-input"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">group</i>
+                        </span>
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">pincode</label>
+                            <input type="email" class="form-control">
+                            <span class="material-input"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="material-icons">group</i>
+                </span>
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">Phone number</label>
+
+                    <input type="email" class="form-control">
+                    <span class="material-input"></span>
+                </div>
+            </div>
+
+            <div class="card card-nav-tabs hidden">
+                <div class="header header-primary">
+                    <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
+                    <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper">
+                            <ul class="nav nav-tabs" data-tabs="tabs">
+                                <li class="active">
+                                    <a href="#profile" data-toggle="tab">
+                                        <i class="material-icons">face</i>
+                                        Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#messages" data-toggle="tab">
+                                        <i class="material-icons">chat</i>
+                                        Messages
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#settings" data-toggle="tab">
+                                        <i class="material-icons">build</i>
+                                        Settings
+                                    </a>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="tab-content text-center">
+                        <div class="tab-pane active" id="profile">
+                            <p> I will be the leader of a company that ends up being worth billions of dollars, because
+                                I got the answers. I understand culture. I am the nucleus. I think that’s a
+                                responsibility that I have, to push possibilities, to show people, this is the level
+                                that things could be at. I think that’s a responsibility that I have, to push
+                                possibilities, to show people, this is the level that things could be at. </p>
+                        </div>
+                        <div class="tab-pane" id="messages">
+                            <p> I think that’s a responsibility that I have, to push possibilities, to show people, this
+                                is the level that things could be at. I will be the leader of a company that ends up
+                                being worth billions of dollars, because I got the answers. I understand culture. I am
+                                the nucleus. I think that’s a responsibility that I have, to push possibilities, to show
+                                people, this is the level that things could be at.</p>
+                        </div>
+                        <div class="tab-pane" id="settings">
+                            <p>I think that’s a responsibility that I have, to push possibilities, to show people, this
+                                is the level that things could be at. So when you get something that has the name Kanye
+                                West on it, it’s supposed to be pushing the furthest possibilities. I will be the leader
+                                of a company that ends up being worth billions of dollars, because I got the answers. I
+                                understand culture. I am the nucleus.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> {% endcomment %}
+        <div class="col-lg-12">
+            <h5 class="text-left"><strong>Order List</strong></h5>
+
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th>images</th>
+                            <th>Product Name</th>
+                            
+                            <th>Qty</th>
+                             <th class="text-right">Date</th>
+                            <th class="text-right">Price</th>
+                            <th class="text-right">Amount</th>
+                            <th class="text-right">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for order in  orders %}
+                        <tr>
+                            <td class="text-center">{{forloop.counter}}</td>
+                            <td>
+
+                                <img style="height: 100px;" src="{{ order.product.image.url }}" alt="...">
+
+                            </td>
+                            <td>{{order.product.name}}</td>
+                            
+                            <td>{{order.quantity}}</td>
+                            <td class="text-right">{{order.price|currency}}</td>
+                            <td class="text-right">{{order.date}}</td>
+                            <td class="text-right">{{order.quantity|multiply:order.price|currency}}</td>
+                            <td class="text-right"><strong>{% if order.status %}
+                                <strong class="label label-success"> Completed</strong>
+                           
+                            {% else %}
+                                <strong class="label label-warning">Pending</strong>
+                            {% endif %}
+
+                            </strong>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                       
+                    </tbody>
+                </table>
+            </div>
+
+
+
+        </div><a href="/store/">
+        <button  style="float: right;" class="btn btn-primary">Continue<i class="material-icons">keyboard_arrow_right</i>
+            <div class="ripple-container"></div>
+        </button></a>
+    </div>
+
+</div>
+{% endblock content %}

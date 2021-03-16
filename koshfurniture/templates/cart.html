@@ -1,0 +1,188 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content %}
+{% load cart %}
+{% load custom_filter %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 ">
+            <h4 style="font-size: x-large; display:inline; float: left; padding-left :20px;padding-top:  10px;">
+                <strong>Shopping Cart Table</strong>
+            </h4>
+            <a href="/store/"><button style="float: right; margin-right:  10px;"
+                    class="btn btn-social btn-fill btn-google">
+                    <i class="material-icons">shopping_bag</i> Continue shopping
+                </button></a>
+
+
+        </div>
+        <hr>
+
+        <div class="col-md-12 col-md-offset-1">
+            <div class="table-responsive">
+                <table class="table table-shopping">
+                    <thead>
+                        <tr>
+                            {% comment %} <th class="text-center"><strong>Sno.</strong></th> {% endcomment %}
+                            <th class="text-center"><strong>Image</strong></th>
+                            <th class="text-center"><strong>Product</strong></th>
+
+
+                            <th class="text-right"><strong>Price</strong></th>
+                            <th class="text-right"><strong>Qty</strong></th>
+                            <th class="text-right"><strong>Amount</strong></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for product in products %}
+                        <tr>
+                            {% comment %} <td class="td-number text-left">
+                                <small>{{forloop.counter}}</small>
+                            </td> {% endcomment %}
+
+                            <td>
+                                <div class="img-container">
+                                    <img src="{{product.image.url}}" alt="...">
+                                </div>
+                            </td>
+                            <td class="td-name">
+                                <a href="#jacket">{{product.name}}</a>
+                                <br><small>by Dolce&amp;Gabbana</small>
+                            </td>
+
+                            <td class="td-number">
+                                <small>&#8377</small>{{product.price}}
+                            </td>
+                            <td class="td-number">
+                                {{product|cart_quantity:request.session.cart}}
+                                {% comment %} <div class="btn-group">
+                                    <button class="btn btn-round btn-info btn-xs"> <i class="material-icons">remove</i>
+                                    </button>
+                                    <button class="btn btn-round btn-info btn-xs"> <i class="material-icons">add</i>
+                                    </button>
+                                </div> {% endcomment %}
+                            </td>
+                            <td class="td-number">
+                                <small>&#8377</small>{{ product|price_total:request.session.cart}}
+                            </td>
+                            {% comment %} <td class="td-actions">
+                                <button type="button" rel="tooltip" data-placement="left" title=""
+                                    class="btn btn-simple" data-original-title="Remove item">
+                                    <i class="material-icons">close</i>
+                                </button>
+                            </td> {% endcomment %}
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td colspan="3">
+                            </td>
+                            <td class="td-total">
+                                Total
+                            </td>
+                            <td class="td-price">
+                                <small>&#8377</small>{{products|total_cart_price:request.session.cart}}
+                            </td>
+                            <td colspan="3" class="text-right">
+                                {% if request.session.customer %}
+
+
+
+                                {% if not products|length_check %}
+
+
+                                <a href="/store/"><button type="button" class="btn btn-info btn-round">First add to
+                                        cart<i class="material-icons">keyboard_arrow_right</i>
+                                    </button></a>
+
+                                {% else %}
+
+                                <a><button data-toggle="modal" data-target="#exampleModal" type="button"
+                                        class="btn btn-info btn-round">continue shopping<i
+                                            class="material-icons">keyboard_arrow_right</i>
+                                    </button></a>
+
+                                {% endif %}
+
+                                {% else %}
+                                <a href="/login/"><button type="button" class="btn btn-info btn-round"> login<i
+                                            class="material-icons">keyboard_arrow_right</i>
+                                    </button></a>
+                                {% endif %}
+
+                            </td>
+
+
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <hr>
+
+    <!-- Button trigger modal -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Checkout form</h5>
+                    <hr>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="m-2 p-3">
+                        <form action="/checkout/" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="">Address</label>
+                                <input required type="text" name="address" id="" class="form-control" placeholder=""
+                                    aria-describedby="helpId">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="">Pincode</label>
+                                <input required type="number" name="pincode" id="" class="form-control" placeholder=""
+                                    aria-describedby="helpId">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="">Phone</label>
+                                <input required type="number" name="phone" id="" class="form-control" placeholder=""
+                                    aria-describedby="helpId">
+
+                            </div>
+
+                            <div  hidden class="form-group">
+                                <label for="">{{products|total_cart_price:request.session.cart}}</label>
+                                <input required type="number" name="payamount" id="" class="form-control" placeholder=""
+                                    aria-describedby="helpId" value="{{products|total_cart_price:request.session.cart}}">
+                            </div>
+
+
+                            <input type="submit" class="btn btn-primary float-right" value="Checkout">
+
+
+
+                        </form>
+
+                       
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

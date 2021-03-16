@@ -1,0 +1,80 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<br>
+<br>
+<br>
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+			<div class="card card-signup">
+				<form class="form" method="POST" action="/login/">
+				{% csrf_token %}
+					<div class="header header-danger text-center">
+						<h4 class="card-title">Log in</h4>
+						 <div class="social-line">
+							{% comment %} <a href="#pablo" class="btn btn-just-icon btn-simple"> {% endcomment %}
+							<p><strong>Login for your design home</strong></p>
+							{% comment %} </a> 
+							<a href="#pablo" class="btn btn-just-icon btn-simple">
+								<i class="fa fa-twitter"></i>
+							</a>
+							<a href="#pablo" class="btn btn-just-icon btn-simple">
+								<i class="fa fa-google-plus"></i>
+							</a> {% endcomment %}
+						</div> 
+					</div>
+					{% comment %} <p class="description text-center">Or Be Classical</p> {% endcomment %}
+					{% if error %}
+							<div class="alert alert-danger" role="alert">
+							  {{error}}
+							</div>
+					{% endif %}
+					<div class="card-content">
+
+
+
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="material-icons">email</i>
+							</span>
+							<div class="form-group is-empty"><input type="text" class="form-control"
+									placeholder="Email" name="email"><span class="material-input"></span></div>
+						</div>
+
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="material-icons">lock_outline</i>
+							</span>
+							<div class="form-group is-empty"><input type="password" placeholder="Password"
+									class="form-control" name="password"><span class="material-input"></span></div>
+						</div>
+
+						<!-- If you want to add a checkbox to this form, uncomment this code
+
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" name="optionsCheckboxes" checked>
+										Subscribe to newsletter
+									</label>
+								</div> -->
+					</div>
+					<div class="footer text-center">
+						<input class="btn btn-primary btn-simple btn-wd btn-lg" type="submit" value="Login" >
+								
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+
+<h6 class="text-center">or</h6>
+
+
+<p style="text-align: center;"><a style="" href="{% url 'signup' %}"
+		class="btn btn-danger btn-raised btn-round text-center">Signup</a> </p>
+{% endblock content%}

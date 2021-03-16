@@ -1,0 +1,153 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+{% load cart %}
+<div class="container">
+
+    <h2 class="section-title">Find what you need</h2>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card card-refine card-plain">
+                <div class="card-content">
+                    <h4 class="card-title">
+                        Reset
+                        <a href="/store"><button  class="btn btn-default btn-fab btn-fab-mini btn-simple pull-right" rel="tooltip" title="" data-original-title="Reset Filter">
+                            <i class="material-icons">cached</i>
+                        </button></a>
+                    </h4>
+                    {% comment %} <div class="panel panel-default panel-rose">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                <h4 class="panel-title">Price Range</h4>
+                                <i class="material-icons">keyboard_arrow_down</i>
+                            </a>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body panel-refine">
+                                <span id="price-left" class="price-left pull-left" data-currency="€">€42</span>
+                                <span id="price-right" class="price-right pull-right" data-currency="€">€880</span>
+                                <div class="clearfix"></div>
+                                <div id="sliderRefine" class="slider slider-rose noUi-target noUi-ltr noUi-horizontal"><div class="noUi-base"><div class="noUi-origin" style="left: 1.37931%;"><div class="noUi-handle" data-handle="0" style="z-index: 5;"></div></div><div class="noUi-connect" style="left: 1.37931%; right: 2.29885%;"></div><div class="noUi-origin" style="left: 97.7011%;"><div class="noUi-handle" data-handle="1" style="z-index: 4;"></div></div></div></div>
+                            </div>
+                        </div> 
+                    </div>
+     {% endcomment %}
+                    <div class="panel panel-default panel-rose">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <h4 class="panel-title">Category</h4>
+                                <i class="material-icons">keyboard_arrow_down</i>
+                            </a>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                                
+                                {% for category in categories %}
+                                <div class="checkbox">
+                                    <label>
+                                        {% comment %} <input type="checkbox" value="" data-toggle="checkbox" checked=""><span class="checkbox-material"></span> {% endcomment %}
+                                        <a href="/store/?category={{category.id}}">{{category.name}}</a>
+                                    </label>
+                                </div>
+                                {% endfor %}
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+    
+                    
+                </div>
+            </div><!-- end card -->
+        </div>
+    
+        <div class="col-md-9">
+            <div class="row"> 
+                
+
+                {% if products %}
+                
+                
+                
+                
+                {% for product in products %}
+                <div  class="col-md-4" id ='{{product.id}}'>
+                    <div class="card card-product card-plain no-shadow" data-colored-shadow="false">
+                        <div  class="thumbnail">
+                            <a href="#">
+                                <img  style= "height: 300px"  src="{{ product.image.url }} " alt="...">
+                            </a>
+                        </div>
+                        <div class="card-content">
+                            <a href="#">
+                                <h4 class="card-title">{{product.name}}</h4>
+                            </a>
+                            <p class="description">
+                               {{product.Description}}
+                            </p>
+                            <div class="footer">
+                             <div class="price-container">
+                                 <span class="price"> &#8377 {{product.price}}</span>
+                             </div>
+
+                                <button class="btn btn-rose btn-simple btn-fab btn-fab-mini btn-round pull-right" rel="tooltip" title="" data-placement="left" data-original-title="Remove from wishlist">
+                                    <i class="material-icons">favorite</i>
+                                </button>
+
+                            </div>
+                            </Br>
+                            <!-- {{ product | is_in_cart:request.session.cart }} -->
+                            
+                            <div class="row" >
+
+                                {% if product|is_in_cart:request.session.cart %}
+                                <div class=" footer text-center" > 
+                                    <form action="/store/#{{product.id}}" style="display: inline;" method="POST">
+                                        {% csrf_token %}
+                                    <input type="text" name="product" value="{{product.id}}" hidden>
+                                    <input type="text" name="remove" value="True" hidden>
+                                    <button type="submit" value="+" class="btn btn-round btn-info btn-xs ">-</button> 
+                                     </form>  
+                                    <div class="text-center">{{ product|cart_quantity:request.session.cart }} in cart</div>
+                                    
+                                    
+                                    <form action="/store/#{{product.id}}" style="display: inline;" method="POST">
+                                        {% csrf_token %}
+                                    <input type="text" name="product" value="{{product.id}}" hidden>
+                                    <button type="submit" value="+" class="btn btn-round btn-info btn-xs ">+</button> 
+                                     </form>               
+                                </div>     
+                                {% else %}
+                                <div class=""> 
+                                    <form action="/store/#{{product.id}}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="text" name="product" value="{{product.id}}" hidden>
+                                    <p style="text-align: center;"><button  type="submit" class="btn btn-danger btn-raised btn-round text-center">Add to cart</button> </p>
+                                    </form>
+                                </div>
+                                {% endif %}
+                                
+                            </div>
+
+                            
+                            
+                            
+                        </div>
+                        
+                    </div> <!-- end card -->
+                 </div>
+                 {% endfor %}
+                {% else %}
+                <h4 class="text-center">no products<h4>
+                 {% endif %}
+            </div>
+    
+    
+       
+        </div>
+    
+    </div>
+</div>
+
+
+{% endblock content %}

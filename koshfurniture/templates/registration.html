@@ -1,0 +1,240 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<br>
+<br>
+<br>
+<div class="container">
+	{% comment %} <div class="row">
+		<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+			<div class="card card-signup">
+				<form class="form" method="POST" action="/signup/">
+					{% csrf_token %}
+					<div class="header header-primary text-center">
+						<h4 class="card-title">Sign up</h4>
+						<div class="social-line">
+							<a href="#pablo" class="btn btn-just-icon btn-simple">
+								<i class="fa fa-facebook-square"></i>
+							</a>
+							<a href="#pablo" class="btn btn-just-icon btn-simple">
+								<i class="fa fa-twitter"></i>
+							</a>
+							<a href="#pablo" class="btn btn-just-icon btn-simple">
+								<i class="fa fa-google-plus"></i>
+							</a>
+						</div>
+					</div>
+					<p class="description text-center">Or Be Classical</p>
+					{% if error %}
+					<div class="alert alert-danger" role="alert">
+						{{error}}
+					</div>
+					{% endif %}
+					<div class="card-content">
+
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="material-icons">face</i>
+							</span>
+							<div class="form-group is-empty"><input required type="text" value="{{value.fullname}}"
+									class="form-control" placeholder="Full Name" name="fullname"><span
+									class="material-input"></span></div>
+						</div>
+
+
+
+
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="material-icons">email</i>
+							</span>
+							<div class="form-group is-empty"><input required type="text" value="{{value.email}}"
+									class="form-control" placeholder="Email" name="email"><span
+									class="material-input"></span></div>
+						</div>
+
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="material-icons">call</i>
+							</span>
+							<div class="form-group is-empty"><input required type="text" value="{{value.phone}}"
+									class="form-control" placeholder="Phoneno" name="Phone"><span
+									class="material-input"></span></div>
+						</div>
+
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="material-icons">lock_outline</i>
+							</span>
+							<div class="form-group is-empty"><input required type="password" placeholder="Password"
+									class="form-control" name="password"><span class="material-input"></span></div>
+						</div>
+
+
+					</div>
+					<div class="footer text-center">
+						<input class="btn btn-primary btn-simple btn-wd btn-lg" type="submit" value="Signup">
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+</div> {% endcomment %}
+
+{% comment %} <div class="modal-content"> {% endcomment %}
+	<div class="card card-signup card-plain">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i
+					class="material-icons">clear</i></button>
+			<h2 class="modal-title card-title text-center" id="myModalLabel">Register</h2>
+		</div>
+		<div class="modal-body">
+			<div class="row">
+				<div class="col-md-5 col-md-offset-1">
+					<div class="info info-horizontal">
+						<div class="icon icon-rose">
+							<i class="material-icons">timeline</i>
+						</div>
+						<div class="description">
+							<h4 class="info-title">Marketing</h4>
+							<p class="description">
+								We've created the marketing campaign of the website. It was a very interesting
+								collaboration.
+							</p>
+						</div>
+					</div>
+
+					<div class="info info-horizontal">
+						<div class="icon icon-primary">
+							<i class="material-icons">code</i>
+						</div>
+						<div class="description">
+							<h4 class="info-title">Fully Coded in HTML5</h4>
+							<p class="description">
+								We've developed the website with HTML5 and CSS3. The client has access to the code using
+								GitHub.
+							</p>
+						</div>
+					</div>
+
+					<div class="info info-horizontal">
+						<div class="icon icon-info">
+							<i class="material-icons">group</i>
+						</div>
+						<div class="description">
+							<h4 class="info-title">Built Audience</h4>
+							<p class="description">
+								There is also a Fully Customizable CMS Admin Dashboard for this product.
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-5">
+					{% comment %} <div class="social text-center">
+						<button class="btn btn-just-icon btn-round btn-twitter">
+							<i class="fa fa-twitter"></i>
+						</button>
+						<button class="btn btn-just-icon btn-round btn-dribbble">
+							<i class="fa fa-dribbble"></i>
+						</button>
+						<button class="btn btn-just-icon btn-round btn-facebook">
+							<i class="fa fa-facebook"> </i>
+						</button>
+						<h4> or be classical </h4>
+					</div> {% endcomment %}
+
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+
+					<form class="form" method="POST" action="/signup/">
+						{% csrf_token %}
+						<div class="header header-primary text-center">
+							<h4 class="card-title">Sign up</h4>
+							{% comment %} <div class="social-line">
+								<a href="#pablo" class="btn btn-just-icon btn-simple">
+									<i class="fa fa-facebook-square"></i>
+								</a>
+								<a href="#pablo" class="btn btn-just-icon btn-simple">
+									<i class="fa fa-twitter"></i>
+								</a>
+								<a href="#pablo" class="btn btn-just-icon btn-simple">
+									<i class="fa fa-google-plus"></i>
+								</a>
+							</div> {% endcomment %}
+						</div>
+						{% comment %} <p class="description text-center">Or Be Classical</p> {% endcomment %}
+						{% if error %}
+						<div class="alert alert-danger" role="alert">
+							{{error}}
+						</div>
+						{% endif %}
+						<div class="card-content">
+
+							<div class="input-group">
+								<span class="input-group-addon">
+									<i class="material-icons">face</i>
+								</span>
+								<div class="form-group is-empty"><input required type="text" value="{{value.fullname}}"
+										class="form-control" placeholder="Full Name" name="fullname"><span
+										class="material-input"></span></div>
+							</div>
+
+
+
+
+							<div class="input-group">
+								<span class="input-group-addon">
+									<i class="material-icons">email</i>
+								</span>
+								<div class="form-group is-empty"><input required type="text" value="{{value.email}}"
+										class="form-control" placeholder="Email" name="email"><span
+										class="material-input"></span></div>
+							</div>
+
+							<div class="input-group">
+								<span class="input-group-addon">
+									<i class="material-icons">call</i>
+								</span>
+								<div class="form-group is-empty"><input required type="text" value="{{value.phone}}"
+										class="form-control" placeholder="Phoneno" name="Phone"><span
+										class="material-input"></span></div>
+							</div>
+
+							<div class="input-group">
+								<span class="input-group-addon">
+									<i class="material-icons">lock_outline</i>
+								</span>
+								<div class="form-group is-empty"><input required type="password" placeholder="Password"
+										class="form-control" name="password"><span class="material-input"></span></div>
+							</div>
+
+
+						</div>
+						{% comment %} <div class="footer text-center">
+							<input class="btn btn-primary btn-simple btn-wd btn-lg" type="submit" value="Signup">
+
+						</div>
+					</form> {% endcomment %}
+
+					<div class="modal-footer text-center">
+						<input type="submit" class="btn btn-primary btn-round" value="Signup">
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+{% endblock content %}
