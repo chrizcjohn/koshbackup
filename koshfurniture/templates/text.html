@@ -1,0 +1,69 @@
+{% load cart %}
+
+{% for product in products %}
+                <div  class="col-md-4" id ='{{product.id}}'>
+                    <div class="card card-product card-plain no-shadow" data-colored-shadow="false">
+                        <div  class="thumbnail">
+                            <a href="#">
+                                <img  style= "height: 300px"  src="{{ product.image.url }} " alt="...">
+                            </a>
+                        </div>
+                        <div class="card-content">
+                            <a href="#">
+                                <h4 class="card-title">{{product.name}}</h4>
+                            </a>
+                            <p class="description">
+                               {{product.Description}}
+                            </p>
+                            <div class="footer">
+                             <div class="price-container">
+                                 <span class="price"> &#8377 {{product.price}}</span>
+                             </div>
+
+                                <button class="btn btn-rose btn-simple btn-fab btn-fab-mini btn-round pull-right" rel="tooltip" title="" data-placement="left" data-original-title="Remove from wishlist">
+                                    <i class="material-icons">favorite</i>
+                                </button>
+
+                            </div>
+                            </Br>
+                            <!-- {{ product | is_in_cart:request.session.cart }} -->
+                            
+                            <div class="row" >
+
+                                {% if product|is_in_cart:request.session.cart %}
+                                <div class=" footer text-center" > 
+                                    <form action="/store/#{{product.id}}" style="display: inline;" method="POST">
+                                        {% csrf_token %}
+                                    <input type="text" name="product" value="{{product.id}}" hidden>
+                                    <input type="text" name="remove" value="True" hidden>
+                                    <button type="submit" value="+" class="btn btn-round btn-info btn-xs ">-</button> 
+                                     </form>  
+                                    <div class="text-center">{{ product|cart_quantity:request.session.cart }} in cart</div>
+                                    
+                                    
+                                    <form action="/store/#{{product.id}}" style="display: inline;" method="POST">
+                                        {% csrf_token %}
+                                    <input type="text" name="product" value="{{product.id}}" hidden>
+                                    <button type="submit" value="+" class="btn btn-round btn-info btn-xs ">+</button> 
+                                     </form>               
+                                </div>     
+                                {% else %}
+                                <div class=""> 
+                                    <form action="/store/#{{product.id}}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="text" name="product" value="{{product.id}}" hidden>
+                                    <p style="text-align: center;"><button  type="submit" class="btn btn-danger btn-raised btn-round text-center">Add to cart</button> </p>
+                                    </form>
+                                </div>
+                                {% endif %}
+                                
+                            </div>
+
+                            
+                            
+                            
+                        </div>
+                        
+                    </div> <!-- end card -->
+                 </div>
+{% endfor %}

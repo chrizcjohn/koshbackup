@@ -9,6 +9,10 @@ from django.utils.decorators import method_decorator
 import json
 from django.http import JsonResponse
 
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from django.template.loader import render_to_string
+
 regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
 SpecialSym = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,20}$"
 pat = re.compile(SpecialSym) 
@@ -304,3 +308,27 @@ def checkout(request):
         print (orderlst)
         
         return render(request, 'payment.html', {'payment': payamount, 'orderlist': orderlst, 'customer':customer})
+
+
+def test(request):
+
+    user = authenticate(username='Christin', password='password')
+    
+    if user:
+        value = True
+    else:
+        value = False
+    return HttpResponse(value)
+
+
+
+def search(request):
+    search = request.GET.get("ser_itm")
+    print("SEARCHITEM:", search)
+    if Product.objects.filter(name__contains=search):
+        itm=Product.objects.filter(name__contains=search)  
+        html_data=render_to_string('text.html',{'products':itm},request=request)
+        print("html_data")
+        return JsonResponse({'html_data':html_data})
+    else:
+        return JsonResponse("Item not found", safe=False)

@@ -3,6 +3,9 @@
 {% block content %}
 {% load cart %}
 <div class="container">
+    <div>
+        <div  class="form-group is-empty"><input id="search_here" type="text" value="" placeholder="Find your products" class="form-control" onchange="my()"><span class="material-input"></span></div>
+    </div>
 
     <h2 class="section-title">Find what you need</h2>
     <div class="row">
@@ -62,13 +65,13 @@
         </div>
     
         <div class="col-md-9">
-            <div class="row"> 
+            <div class="row" id="box"> 
                 
 
                 {% if products %}
                 
                 
-                
+                <div id="box"> 
                 
                 {% for product in products %}
                 <div  class="col-md-4" id ='{{product.id}}'>
@@ -140,6 +143,8 @@
                 {% else %}
                 <h4 class="text-center">no products<h4>
                  {% endif %}
+
+                 </div>
             </div>
     
     
@@ -148,6 +153,30 @@
     
     </div>
 </div>
+<script>
+    function my() {
+      var ser = document.getElementById("search_here").value;
+      console.log(ser);
+      $.ajax({
+        url: "search",
+        type: "get",
+        data: {
+          ser_itm: ser,
+        },
+        dataType: "json",
+        success: function (data) {
+          console.log(data);
+          if (data == "Item not found") {
+            $("#box").html(data);
+          } else $("#box").html(data.html_data);
+        },
+      });
+    }
+  
+    if ((document.getElementById("search_here").value = "")) {
+      location.reload();
+    }
+  </script>
 
 
 {% endblock content %}
